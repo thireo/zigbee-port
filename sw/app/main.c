@@ -65,6 +65,9 @@
 
 #include "drv_ws2812.h"
 
+
+#define RELAY_GPIO 11   // 
+
 #define MAX_CHILDREN                      10                                    /**< The maximum amount of connected devices. Setting this value to 0 disables association to this device.  */
 #define IEEE_CHANNEL_MASK                 (1l << ZIGBEE_CHANNEL)                /**< Scan only one, predefined channel to find the coordinator. */
 #define HA_DIMMABLE_LIGHT_ENDPOINT        10                                    /**< Device endpoint, used to receive light controlling commands. */
@@ -538,6 +541,8 @@ int main(void)
     /* Initialize timer, logging system and GPIOs. */
     timer_init();
     log_init();
+    nrf_gpio_cfg_output(RELAY_GPIO);
+    nrf_gpio_pin_set(RELAY_GPIO);
     //leds_buttons_init();
 
     /* Set Zigbee stack logging level and traffic dump subsystem. */
